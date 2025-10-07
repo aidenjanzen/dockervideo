@@ -1,0 +1,5 @@
+# Ignore all uploaded user data
+file-data/*
+
+# But keep the folder itself in Git (so it's created on clone)
+!file-data/.gitkeep
