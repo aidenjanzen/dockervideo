@@ -2,36 +2,26 @@
 ## Overview
 
 The Video Streaming System is a microservices-based web application that enables users to upload, stream, and manage videos through a centralized dashboard.
-It leverages containerized services for authentication, file management, video metadata handling, and a web gateway interface.
 
 # Architecture
 The application is composed of several interconnected services, each responsible for specific functionality:
 
-## Authentication Service (auth-service)
-Manages user registration, authentication, and admin authorization.
+	### Authentication Service (auth-service)
+	Manages user registration, authentication, and admin authorization.
 
-## File Service (file-service)
-Handles uploading, storing, and deleting video files on the server’s file system.
+	### File Service (file-service)
+	Handles uploading, storing, and deleting video files on the server’s file system.
 
-## Video Service (video-service)
-Manages video metadata (e.g., names, file paths, owners) and proxies streaming requests to the file service.
+	### Video Service (video-service)
+	Manages video metadata (e.g., names, file paths, owners) and proxies streaming requests to the file service.
 
-## Gateway Service (gateway)
-A Flask-based web interface that allows users to log in, upload videos, stream content, manage their library, and for admins — manage users.
+	### Gateway Service (gateway)
+	A Flask-based web interface that allows users to log in, upload videos, stream content, manage their library, and for admins — manage users.
 
-These services communicate through well-defined REST APIs and are orchestrated using Docker Compose.
+	### MySQL (db)
+	Stores user credentials (through the auth service) and video metadata (through the video service).
 
-## Databases
-The system uses a MySQL database to store and manage structured metadata:
-
-### MySQL (db)
-Stores user credentials (through the auth service) and video metadata (through the video service).
-
-Each service connects to the database as needed to perform authentication, user management, and video indexing.
-
-# Prerequisites
-Before setting up the project, ensure the following are installed on your system:
-
+	Each service connects to the database as needed to perform authentication, user management, and video indexing.
 
 # Setup Instructions
 1. Clone the Repository
@@ -86,12 +76,10 @@ pass: `password123`
 ```
 # Technologies Used:
 
-Backend: Python (Flask)
+Backend: **Python (Flask)**
 
-Frontend: HTML / Jinja templates
+Frontend: **HTML / Jinja templates**
 
-Database: MySQL
+Database: **MySQL**
 
-Containerization: Docker & Docker Compose
-
-Networking: Internal Docker bridge network for service communication
+Containerization: **Docker & Docker Compose**
