@@ -6,22 +6,22 @@ The Video Streaming System is a microservices-based web application that enables
 # Architecture
 The application is composed of several interconnected services, each responsible for specific functionality:
 
-	### Authentication Service (auth-service)
-	Manages user registration, authentication, and admin authorization.
+### Authentication Service (auth-service)
+- Manages user registration, authentication, and admin authorization.
 
-	### File Service (file-service)
-	Handles uploading, storing, and deleting video files on the server’s file system.
+### File Service (file-service)
+- Handles uploading, storing, and deleting video files on the server’s file system.
 
-	### Video Service (video-service)
-	Manages video metadata (e.g., names, file paths, owners) and proxies streaming requests to the file service.
+### Video Service (video-service)
+- Manages video metadata (e.g., names, file paths, owners) and proxies streaming requests to the file service.
 
-	### Gateway Service (gateway)
-	A Flask-based web interface that allows users to log in, upload videos, stream content, manage their library, and for admins — manage users.
+### Gateway Service (gateway)
+- A Flask-based web interface that allows users to log in, upload videos, stream content, manage their library, and for admins — manage users.
 
-	### MySQL (db)
-	Stores user credentials (through the auth service) and video metadata (through the video service).
+### MySQL (db)
+- Stores user credentials (through the auth service) and video metadata (through the video service).
 
-	Each service connects to the database as needed to perform authentication, user management, and video indexing.
+Each service connects to the database as needed to perform authentication, user management, and video indexing.
 
 # Setup Instructions
 1. Clone the Repository
@@ -45,11 +45,11 @@ The application is composed of several interconnected services, each responsible
     `http://localhost:5000`
 
     Here you can log in, upload videos, stream content, and manage users.
-    
-## Admin Credentials
-user: `admin`
 
-pass: `password123`
+## Admin Credentials
+    user: admin
+
+    pass: password123
 
 # Directory Structure
 ```
