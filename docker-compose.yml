@@ -1,0 +1,57 @@
+services:
+  gateway:
+    build: ./gateway
+    ports:
+      - "5000:5000"        # only gateway is exposed to host
+    environment:
+      AUTH_URL: "http://auth-service:5000"
+      FILE_URL: "http://file-service:5000"
+      VIDEO_URL: "http://video-service:5000"
+    depends_on:
+      - auth-service
+      - file-service
+      - video-service
+      - db
+
+  auth-service:
+    build: ./auth-service
+    environment:
+      MYSQL_HOST: db
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_DB: videos
+    depends_on:
+      - db
+
+  file-service:
+    build: ./file-service
+    volumes:
+      - ./file-data:/data/videos
+    # internal port 5000 only; no host port published
+    depends_on:
+      - db
+
+  video-service:
+    build: ./video-service
+    environment:
+      MYSQL_HOST: db
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_DB: videos
+      AUTH_URL: "http://auth-service:5000"
+      FILE_URL: "http://file-service:5000"
+    depends_on:
+      - auth-service
+      - file-service
+      - db
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  db_data:

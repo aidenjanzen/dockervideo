@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head><title>Dashboard</title></head>
+<body>
+  <h2>Welcome {{username}} {% if is_admin %}(admin){% endif %}</h2>
+  <a href="/logout">Logout</a>
+
+  <h3>Upload</h3>
+  <form method="post" action="/upload" enctype="multipart/form-data">
+    <input type="file" name="file" accept="video/*">
+    <button type="submit">Upload</button>
+  </form>
+
+  <h3>Your Videos</h3>
+  {% if videos %}
+    <ul>
+      {% for v in videos %}
+        <li>
+          {{v.name}} (owner: {{v.owner}})
+          <a href="/stream/{{v.path}}">Stream</a>
+          <form style="display:inline" method="post" action="/delete/{{v.id}}">
+            <button type="submit">Delete</button>
+          </form>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No videos found.</p>
+  {% endif %}
+
+  {% if is_admin %}
+    <h3>Create User</h3>
+    <form method="post" action="/create-user">
+      <label>New username: <input name="new_user"></label><br>
+      <label>New password: <input name="new_pass"></label><br>
+      <label>Confirm admin password: <input name="admin_pass_confirm" type="password"></label><br>
+      <button type="submit">Create</button>
+    </form>
+  {% endif %}
+
+  {% if is_admin %}
+  <h3>Delete User</h3>
+  <form method="post" action="/delete-user">
+    <label>Username to delete: <input name="delete_user"></label><br>
+    <label>Confirm admin password: <input name="admin_pass_confirm" type="password"></label><br>
+    <button type="submit">Delete User</button>
+  </form>
+  {% endif %}
+
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul>{% for m in messages %}<li>{{m}}</li>{% endfor %}</ul>
+    {% endif %}
+  {% endwith %}
+</body>
+</html>
