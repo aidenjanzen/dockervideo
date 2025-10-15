@@ -26,7 +26,7 @@ Each service connects to the database as needed to perform authentication, user 
 # Setup Instructions
 1. Clone the Repository
 
-    `git clone https://link.com`
+    `git clone https://github.com/aidenjanzen/dockervideo.git`
 
     `cd video-streaming-system`
 
